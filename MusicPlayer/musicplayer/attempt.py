@@ -1,22 +1,46 @@
 from tkinter import *
 import pygame
 from PIL import ImageTk, Image
+from tkinter import filedialog
 
 root = Tk()
 root.title('Music Player')
 root.iconbitmap('IconMu.ico')
-root.geometry("960x540")
+root.geometry("1080x600")
 
-bg = ImageTk.PhotoImage(Image.open("background.png"))
+bg = ImageTk.PhotoImage(Image.open("pdp.png"))
 
 myLabel = Label(root, image=bg)
 myLabel.place(x=0, y=0)
 
 pygame.mixer.init()
 
+
 def add_song():
-    pass
-all_songs = Listbox(root, bg='white', fg='red', width=70, height= 20)
+    song = filedialog.askopenfilename(initialdir='Music', title="Select a Song", filetypes=(("mp3 Files","*.mp3"), ))
+    song = song.replace("C:/Users/acer/Music/", "")
+    song = song.replace(".mp3", "")
+    all_songs.insert(END, song)
+
+
+def play():
+    song = all_songs.get(ACTIVE)
+    song = f'C:/Users/acer/Music/{song}.mp3'
+
+    pygame.mixer.music.load(song)
+    pygame.mixer.music.play(loops=0)
+
+
+def pause():
+    pygame.mixer.music.pause()
+
+
+def stop():
+    pygame.mixer.music.stop()
+    all_songs.select_clear(ACTIVE)
+
+
+all_songs = Listbox(root, bg='white', fg='red', width=70, height=20, selectbackground='red')
 all_songs.pack(pady=10)
 
 play_image = PhotoImage(file='play.png')
@@ -28,9 +52,9 @@ back_image = PhotoImage(file='back.png')
 control_frame = Frame(root)
 control_frame.pack()
 
-play_button = Button(control_frame, image=play_image, borderwidth=0)
-pause_button = Button(control_frame, image=pause_image, borderwidth=0)
-stop_button = Button(control_frame, image=stop_image, borderwidth=0)
+play_button = Button(control_frame, image=play_image, borderwidth=0, command=play)
+pause_button = Button(control_frame, image=pause_image, borderwidth=0, command=pause)
+stop_button = Button(control_frame, image=stop_image, borderwidth=0, command=stop)
 forward_button = Button(control_frame, image=forward_image, borderwidth=0)
 back_button = Button(control_frame, image=back_image, borderwidth=0)
 
