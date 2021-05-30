@@ -6,7 +6,7 @@ from tkinter import filedialog
 root = Tk()
 root.title('Music Player')
 root.iconbitmap('IconMu.ico')
-root.geometry("1080x600")
+root.geometry("960x540")
 
 bg = ImageTk.PhotoImage(Image.open("pdp.png"))
 
@@ -52,7 +52,7 @@ back_image = PhotoImage(file='back.png')
 control_frame = Frame(root)
 control_frame.pack()
 
-play_button = Button(control_frame, image=play_image, borderwidth=0, command=play)
+play_button = Button(control_frame, image=play_image, command=play)
 pause_button = Button(control_frame, image=pause_image, borderwidth=0, command=pause)
 stop_button = Button(control_frame, image=stop_image, borderwidth=0, command=stop)
 forward_button = Button(control_frame, image=forward_image, borderwidth=0)
@@ -70,5 +70,8 @@ root.config(menu=my_menu)
 add_song_menu = Menu()
 my_menu.add_cascade(label="Add songs", menu=add_song_menu)
 add_song_menu.add_command(label="Add a song to playlist", command=add_song)
+scale = Scale(root, from_=0, to=100, orient=HORIZONTAL, command=set_volume)
+scale.set(50)
+scale.pack(ipadx=50, ipady=10)
 root.mainloop()
 

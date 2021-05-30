@@ -13,9 +13,6 @@ pygame.mixer.init()
 
 def play_time():
     current_time = pygame.mixer.music.get_pos()
-    status_bar.config(text=current_time)
-
-    status_bar.after(1000, play_time)
 
 
 def add_songs():
@@ -105,8 +102,8 @@ stop_button = Button(control_frame, image=stop_image, borderwidth=0, command=sto
 forward_button = Button(control_frame, image=forward_image, borderwidth=0, command=next_song)
 back_button = Button(control_frame, image=back_image, borderwidth=0, command=previous_song)
 
-play_button.grid(row=0, column=2)
-pause_button.grid(row=0, column=1)
+play_button.grid(row=0, column=1)
+pause_button.grid(row=0, column=2)
 stop_button.grid(row=0, column=3)
 forward_button.grid(row=0, column=4)
 back_button.grid(row=0, column=0)
@@ -118,7 +115,6 @@ add_songs_menu = Menu()
 my_menu.add_cascade(label="Add Music", menu=add_songs_menu)
 add_songs_menu.add_command(label="Add any Music to playlist", command=add_songs)
 
-status_bar = Label(root, bd=1, anchor=E)
-status_bar.pack(side=TOP, ipady=2)
+
 root.mainloop()
 
