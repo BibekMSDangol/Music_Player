@@ -4,7 +4,6 @@ from tkinter import messagebox
 from tkinter import filedialog
 from PIL import ImageTk, Image
 
-
 def music_player():
     root = Toplevel()
     root.title('Music Player')
@@ -110,6 +109,8 @@ def music_player():
     stop_button.grid(row=0, column=3)
     forward_button.grid(row=0, column=4)
     back_button.grid(row=0, column=0)
+    volume_Label=Label(control_frame, text="Volume")
+    volume_Label.grid(row=5, column=2)
 
     my_menu = Menu(root)
     root.config(menu=my_menu)
@@ -142,9 +143,10 @@ root = Tk()
 root.title("Login")
 root.iconbitmap('IconMu.ico')
 root.geometry("300x200")
+bg = ImageTk.PhotoImage(Image.open("lake.jpg"))
 global e1
 global e2
-
+Label(root, image=bg).place(x=0,y=0)
 Label(root, text="Username :").place(x=5, y=5)
 Label(root, text="Password :").place(x=5, y=40)
 
