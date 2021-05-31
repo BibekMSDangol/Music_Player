@@ -4,11 +4,17 @@ from tkinter import messagebox
 from tkinter import filedialog
 from PIL import ImageTk, Image
 
+
 def music_player():
     root = Toplevel()
     root.title('Music Player')
     root.iconbitmap('IconMu.ico')
-    root.geometry("1080x618")
+    root.geometry("1000x618")
+
+    bg = ImageTk.PhotoImage(Image.open("backs.png"))
+
+    myLabel = Label(root, image=bg)
+    myLabel.place(x=0, y=0)
 
     pygame.mixer.init()
 
@@ -43,11 +49,9 @@ def music_player():
             pygame.mixer.music.pause()
             paused = True
 
-
     def stop():
         pygame.mixer.music.stop()
         all_songs.select_clear(ACTIVE)
-
 
     def next_song():
         new_song = all_songs.curselection()
@@ -64,7 +68,6 @@ def music_player():
 
         all_songs.select_set(new_song, last=None)
 
-
     def previous_song():
         new_song = all_songs.curselection()
         new_song = new_song[0] - 1
@@ -79,7 +82,6 @@ def music_player():
         all_songs.activate(new_song)
 
         all_songs.select_set(new_song, last=None)
-
 
     def set_volume(val):
         volume = int(val)/100
@@ -124,6 +126,7 @@ def music_player():
     scale.pack(ipadx=50, ipady=10)
 
     root.mainloop()
+
 
 def ok():
     username = e1.get()
